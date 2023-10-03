@@ -9,8 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      // Se crea un proveedor de BLoC que proporciona una instancia de HomeCubit al árbol de widgets.
       create: (context) => HomeCubit(context.read<ApiRepository>())..getData(),
-      child: const Homeview(),
+      child:
+          const Homeview(), // Renderiza la vista principal de la página de inicio.
     );
   }
 }
@@ -39,7 +41,7 @@ class Homeview extends StatelessWidget {
           switch (state.status) {
             case HomeStatus.loading:
               return const Center(child: CircularProgressIndicator());
-            case HomeStatus.succes:
+            case HomeStatus.success:
               return GridView.count(
                 crossAxisCount: 2,
                 mainAxisSpacing: 5,
@@ -53,8 +55,9 @@ class Homeview extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 1.0,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(api.url, fit: BoxFit.cover)),
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.network(api.url, fit: BoxFit.cover),
+                      ),
                     ),
                   );
                 }).toList(),
